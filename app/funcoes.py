@@ -1,6 +1,7 @@
 from statsbombpy import sb
 import pandas as pd
 from langchain_google_genai import ChatGoogleGenerativeAI
+from datetime import timedelta
 
 def get_match(match_id):
     """
@@ -82,8 +83,50 @@ def contexto_eventos_principais(df):
     return resposta
 
 
-df = get_match(3795221)
+def estatisticas_jogador(match_id, player_name) -> str:
+    """
+    Cria um perfil detalhado de um jogador específico em uma partida.
 
-resposta_v2 = contexto_eventos_principais(df)
+    Parâmetros:
+        match_id (int): ID da partida.
+        player_name (str): Nome do jogador que será analisado.
 
-print(resposta_v2)
+    Retorna:
+        dict: Dicionário com as estatísticas detalhadas do jogador.
+    """
+    try:
+        events = sb.events(match_id=match_id)
+
+        if events.empty:
+            return {"Erro": "Nenhum evento encontrado para a partida."}
+
+        player_events = events[events['player'] == player_name]
+
+        if player_events.empty:
+            return {"Erro": f"Jogador '{player_name}' não encontrado na partida {match_id}."}
+
+        # Estatísticas
+        estatisticas_jogador = {
+            "player": player_name,
+            "passes_completed": player_events[(player_events['type'] == 'Pass') & (player_events['pass_outcome'].isna())].shape[0],
+            "passes_attempted": player_events[player_events['type'] == 'Pass'].shape[0],
+            "shots": player_events[player_events['type'] == 'Shot'].shape[0],
+            "shots_on_target": player_events[(player_events['type'] == 'Shot') & (player_events['shot_outcome'] == 'On Target')].shape[0],
+            "fouls_committed": player_events[player_events['type'] == 'Foul Committed'].shape[0],
+            "fouls_won": player_events[player_events['type'] == 'Foul Won'].shape[0],
+            "tackles": player_events[player_events['type'] == 'Tackle'].shape[0],
+            "interceptions": player_events[player_events['type'] == 'Interception'].shape[0],
+            "dribbles_successful": player_events[(player_events['type'] == 'Dribble') & (player_events['dribble_outcome'] == 'Complete')].shape[0],
+            "dribbles_attempted": player_events[player_events['type'] == 'Dribble'].shape[0],
+        }
+
+    except KeyError as e:
+        return {"Erro": f"Erro na obtenção dos dados: {e}"}
+
+    except Exception as e:
+        return {"Erro": f"Ocorreu um erro inesperado: {e}"}
+    
+    return estatisticas_jogador
+
+
+print(estatisticas_jogador(3795221, "Raheem Stebgffrlinng"))
