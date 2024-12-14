@@ -24,12 +24,14 @@ Certifique-se de que sua máquina tenha os seguintes itens instalados:
 1. **Clone o repositório**:
 
    git clone https://github.com/IgorCanelo/Data-Driven-AT.git
+
+   # Entrar na pasta clonada:
    cd Data-Driven-AT
 
 2. **Crie um ambiente virtual**:
 
     python -m venv venv
-    
+
     # Ativar no Windows:
     venv\Scripts\activate
 
