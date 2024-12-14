@@ -42,32 +42,15 @@ def contexto_eventos_principais(df):
 
     times = df['team'].dropna().unique().tolist()
     time1, time2 = times
-
-    # Gols
     gols = df[(df['type'] == 'Shot') & (df['shot_outcome'] == 'Goal')]
-
-    # Assistências
     assistencias = df[df['pass_shot_assist'] == True]
-
-    # Cartões
     cartoes = df[df['foul_committed_card'].notnull()]
-    
-    # Substituições
     substituicoes = df[df['type'] == 'Substitution']
-
-    # Faltas cometidas
     faltas = df[df['type'] == 'Foul Committed']
-
-    # Faltas sofridas
     faltas_sofridas = df[df['type'] == 'Foul Won']
-
-    # Defesas do goleiro
     defesas = df[(df['type'] == 'Goal Keeper') & (df['goalkeeper_outcome'] == 'Saved')]
-
-    # Chutes no gol
     chutes = df[df['type'] == 'Shot']
 
-    # Organiza os resultados em um dicionário
     eventos_principais = {
         'Times': f'{time1} vs {time2}',
         'Gols': gols,
