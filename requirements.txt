@@ -2,3 +2,4 @@ streamlit
 fastapi
 statsbombpy
 pandas
+langchain-google-genai
