@@ -3,3 +3,5 @@ fastapi
 statsbombpy
 pandas
 langchain-google-genai
+uvicorn
+pydantic
