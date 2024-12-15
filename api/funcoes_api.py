@@ -38,7 +38,7 @@ def contexto_eventos_principais(df):
         df (pd.DataFrame): DataFrame contendo os dados da partida.
 
     Retorna:
-        dict: Um dicionário com DataFrames filtrados por tipo de evento.
+        str: A análise feita pela LLM dos principais pontos do jogo.
     """
     gol_v1 = df[['team', 'shot_outcome']].dropna()
     gol = gol_v1[gol_v1['shot_outcome'] == 'Goal']
