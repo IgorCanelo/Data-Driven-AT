@@ -1,7 +1,6 @@
 from statsbombpy import sb
 import pandas as pd
 from langchain_google_genai import ChatGoogleGenerativeAI
-from datetime import timedelta
 
 def get_match(match_id):
     """
@@ -184,5 +183,5 @@ def estatisticas_jogador(match_id, player_name) -> str:
 
 
 # df = get_match(3795221)
-
+# print(df.columns)
 # print(contexto_eventos_principais(df, estilo='humoristico'))
