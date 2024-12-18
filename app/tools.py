@@ -1,8 +1,4 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-
-from app.funcoes_app import get_match, estatisticas_jogador
+from funcoes_app import get_match, estatisticas_jogador
 from langchain.tools import tool
 
 # Tool 1: Consulta de Partida

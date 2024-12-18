@@ -1,5 +1,6 @@
 import streamlit as st
 from funcoes_app import get_match, estatisticas_jogador, contexto_eventos_principais
+from agente import funcao_agente
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -142,7 +143,8 @@ def narrativa():
             st.markdown("### Narrativa Gerada:")
             st.write(narrativa)
         
-
+        st.markdown("---")
+        agente()
 
 def filtros():
     st.header("Selecione o ID de uma partida específica")
@@ -354,6 +356,21 @@ def comparacao():
                 st.markdown("---")
 
 
+def agente():
+    id_selecionado = st.session_state["id_partida_init"]
+    st.subheader("Agente de LLM treinado para responder dúvidas sobre a partida e comparações entre jogadores")
+    query = st.text_input("Digite sua pergunta sobre a partida:", value="")
+    
+    if st.button("Enviar"):
+        if query.strip():
+            resposta = funcao_agente(f"""
+                                     Sempre responda em prtuguês e explique por meio de dados como você atingiu a resposta em detalhes.
+                                     O ID da partida é: {id_selecionado}, A pergunta é a seguinte: {query}""")
+            st.write("### Resposta:")
+            st.write(resposta)
+        else:
+            st.warning("Por favor, insira uma pergunta válida.")
+
 
 ##################################################### PAGINAS ############################################################################
 
@@ -363,9 +380,9 @@ def pagina_inicial():
 def narrativa_personalizada():
     narrativa()
 
+
 def analise_exploratoria():
     filtros()
-    #graficos()
 
 def comparacao_jogadores():
     comparacao()
