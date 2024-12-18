@@ -1,3 +1,4 @@
-env/
+at_datadriven_env/
 api/__pycache__/
 app/__pycache__/
+app/agente_react/__pycache__/

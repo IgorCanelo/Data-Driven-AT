@@ -58,7 +58,7 @@ def eventos(df):
     return eventos_principais
 
 
-def contexto_eventos_principais(df, estilo='formal'):
+def contexto_eventos_principais(df, estilo='Formal'):
     """
     Identifica os principais eventos de uma partida de futebol. E passa para uma LLM realizar uma análise descritiva com base em uma narrativa
     
@@ -69,7 +69,7 @@ def contexto_eventos_principais(df, estilo='formal'):
         dict: Um dicionário com DataFrames filtrados por tipo de evento.
     """
 
-    if estilo == "formal":
+    if estilo == "Formal":
         narrativa = """
         Formal: Torne a descrição mais objetiva e precisa, refletindo o tom sério. 
         
@@ -77,7 +77,7 @@ def contexto_eventos_principais(df, estilo='formal'):
         "Uma partida marcada por equilíbrio técnico e decisões estratégicas. O resultado reflete o empenho das equipes e a importância do confronto no contexto do campeonato."
         """
 
-    elif estilo == "humoristico":
+    elif estilo == "Humorístico":
         narrativa = """
         Humorístico: Utilize mais analogias engraçadas e inclua pequenos exageros para gerar humor. 
         
@@ -85,7 +85,7 @@ def contexto_eventos_principais(df, estilo='formal'):
         "O campo parecia uma pista de dança, com dribles dignos de TikTok e algumas quedas que dariam um Oscar! No final, o placar foi só um detalhe; o show foi o verdadeiro prêmio."
         """
 
-    elif estilo == "tecnico":
+    elif estilo == "Técnico":
         narrativa = """
         Técnico: Insira análises detalhadas sobre táticas e estatísticas. 
         

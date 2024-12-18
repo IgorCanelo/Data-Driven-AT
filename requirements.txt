@@ -3,5 +3,9 @@ fastapi
 statsbombpy
 pandas
 langchain-google-genai
+langchain-tools
 uvicorn
 pydantic
+plotly
+seaborn
+matplotlib
